@@ -2,7 +2,6 @@ const Rockbtn = document.getElementById('rock');
 const Paperbtn = document.getElementById('Paper');
 const Scissorsbtn = document.getElementById('Scissors');
 
-let computerMove = '';
 
 function pickComputerMove(){
     const randomNumber = Math.random();
@@ -42,6 +41,7 @@ function playGame(playerMove){
         } else if (computerMove === 'Scissors'){
             result = 'You lose';
         }
+        
     } else if(playerMove === 'Scissors'){
         if (computerMove === 'Rock'){
             result = 'You lose';
