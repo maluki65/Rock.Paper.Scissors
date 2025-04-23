@@ -6,6 +6,9 @@ let computerMove = '';
 
 function pickComputerMove(){
     const randomNumber = Math.random();
+
+    let computerMove = '';
+
     if (randomNumber >= 0 && randomNumber < 1/3){
         computerMove = 'Rock';
     } else if(randomNumber >= 1/3 && randomNumber < 2/3){
@@ -13,9 +16,12 @@ function pickComputerMove(){
     } else if (randomNumber >= 2/3 && randomNumber < 1){
         computerMove ='Scissors';
     }
+
+    return computerMove;
 }
+
 Rockbtn.addEventListener('click', function(){
-    pickComputerMove();
+    const computerMove = pickComputerMove();
 
     let result = '';
     if (computerMove === 'Rock'){
@@ -29,7 +35,7 @@ Rockbtn.addEventListener('click', function(){
 })
 
 Paperbtn.addEventListener('click', function(){
-    pickComputerMove();
+    const computerMove = pickComputerMove();
 
     let result = '';
     if (computerMove === 'Rock'){
@@ -43,7 +49,7 @@ Paperbtn.addEventListener('click', function(){
 })
 
 Scissorsbtn.addEventListener('click', function(){
-    pickComputerMove();
+    const computerMove = pickComputerMove();
 
     let result = '';
     if (computerMove === 'Rock'){
