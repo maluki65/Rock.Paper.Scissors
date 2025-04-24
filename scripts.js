@@ -1,8 +1,15 @@
 const Rockbtn = document.getElementById('rock');
 const Paperbtn = document.getElementById('Paper');
 const Scissorsbtn = document.getElementById('Scissors');
+const resetbtn = document.getElementById('reset');
 
+let score = JSON.parse(localStorage.getItem('score')) || {
+    wins: 0,
+    losses: 0,
+    ties: 0
+};
 
+//On computer picking a move 
 function pickComputerMove(){
     const randomNumber = Math.random();
 
@@ -19,6 +26,7 @@ function pickComputerMove(){
     return computerMove;
 }
 
+//On playing game
 function playGame(playerMove){
     const computerMove = pickComputerMove();
 
@@ -35,25 +43,43 @@ function playGame(playerMove){
 
     } else if(playerMove === 'Paper'){
         if (computerMove === 'Rock'){
-            result = 'You win';
+            result = 'You Win';
         } else if (computerMove === 'Paper'){
             result = 'Tie';
         } else if (computerMove === 'Scissors'){
-            result = 'You lose';
+            result = 'You Lose';
         }
         
     } else if(playerMove === 'Scissors'){
         if (computerMove === 'Rock'){
-            result = 'You lose';
+            result = 'You Lose';
         } else if (computerMove === 'Paper'){
-            result = 'You win';
+            result = 'You Win';
         } else if (computerMove === 'Scissors'){
             result = 'Tie';
         }
     }
 
-    alert(`You picked ${playerMove}. Computer picked ${computerMove}.${result}`);
+    if(result === 'You Win'){
+        score.wins += 1;
+    } else if (result === 'You Lose'){
+        score.losses += 1;
+    } else if (result === 'Tie'){
+        score.ties += 1;
+    }
+
+    localStorage.setItem('score', JSON.stringify(score));
+
+    alert(`You picked ${playerMove}. Computer picked ${computerMove}.${result} \n Wins: ${score.wins}, losses: ${score.losses}, Ties: ${score.ties}`);
 }
+
+//On resetting scrore
+resetbtn.addEventListener('click', function(){
+    score.wins = 0;
+    score.ties = 0;
+    score.losses = 0;
+    localStorage.removeItem('score');
+})
 
 Rockbtn.addEventListener('click', function(){
     playGame('Rock');
