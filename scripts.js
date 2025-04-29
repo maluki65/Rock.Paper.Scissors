@@ -3,11 +3,14 @@ const Paperbtn = document.getElementById('Paper');
 const Scissorsbtn = document.getElementById('Scissors');
 const resetbtn = document.getElementById('reset');
 
+
 let score = JSON.parse(localStorage.getItem('score')) || {
     wins: 0,
     losses: 0,
     ties: 0
 };
+
+updateScoreFunction();
 
 //On computer picking a move 
 function pickComputerMove(){
@@ -69,8 +72,16 @@ function playGame(playerMove){
     }
 
     localStorage.setItem('score', JSON.stringify(score));
+    
+    updateScoreFunction();
 
-    alert(`You picked ${playerMove}. Computer picked ${computerMove}.${result} \n Wins: ${score.wins}, losses: ${score.losses}, Ties: ${score.ties}`);
+    document.querySelector('.Js-result').innerHTML = result;
+    document.querySelector('.Js-moves').innerHTML = `You ${playerMove} - computer ${computerMove}`;
+}
+
+function updateScoreFunction(){
+    document.querySelector('.JS-Score')
+    .innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
 }
 
 //On resetting scrore
@@ -79,6 +90,7 @@ resetbtn.addEventListener('click', function(){
     score.ties = 0;
     score.losses = 0;
     localStorage.removeItem('score');
+    updateScoreFunction();
 })
 
 Rockbtn.addEventListener('click', function(){
