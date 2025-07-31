@@ -2,6 +2,7 @@ const Rockbtn = document.getElementById('rock');
 const Paperbtn = document.getElementById('Paper');
 const Scissorsbtn = document.getElementById('Scissors');
 const resetbtn = document.getElementById('reset');
+const autoPlayBtn = document.getElementById('AutoPlay');
 
 
 let score = JSON.parse(localStorage.getItem('score')) || {
@@ -27,6 +28,24 @@ function pickComputerMove(){
     }
 
     return computerMove;
+}
+
+let isAutoPLaying =  false;
+let intervalId;
+
+//On AutoPlaying
+function autoPlay () {
+    if (!isAutoPLaying) {
+        intervalId = setInterval(() => {
+            const playerMove =  pickComputerMove();
+            playGame(playerMove);
+        }, 1000);
+        isAutoPLaying = true;
+    } else {
+        clearInterval(intervalId);
+        isAutoPLaying = false;
+    }
+    
 }
 
 //On playing game
