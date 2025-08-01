@@ -45,8 +45,17 @@ function autoPlay () {
         clearInterval(intervalId);
         isAutoPLaying = false;
     }
-    
 }
+
+document.body.addEventListener('keydown', (event) => {
+    if (event.key === 'r'){
+        playGame('Rock');
+    } else if (event.key === 'p') {
+        playGame('Paper');
+    } else if (event.key === 's') {
+        playGame('Scissors');
+    }
+})
 
 //On playing game
 function playGame(playerMove){
